@@ -1,0 +1,6 @@
+*.csv
+permutations.py
+description.py
+*.pkl
+*/model_0/*
+*.pyc
