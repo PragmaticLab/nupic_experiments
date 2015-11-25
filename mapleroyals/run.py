@@ -37,7 +37,7 @@ while True:
 	})
 	predictionQueue.put(int(result.inferences["multiStepBestPredictions"][1]))
 	prediction = predictionQueue.get()
-	print str(timestamp) + ". predicted: " + str(prediction) + ", actual: " + str(players) + ", queuesize: " + str(n.qsize())
+	print str(timestamp) + ". predicted: " + str(prediction) + ", actual: " + str(players) + ", queuesize: " + str(predictionQueue.qsize())
 	resultWriter.writerow([timestamp, prediction, players])
 	futureWriter.writerow([timestamp, players])
 	if count % 1000 == 0:
