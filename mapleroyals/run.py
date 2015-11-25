@@ -41,7 +41,7 @@ while True:
 	futurePrediction = int(result.inferences["multiStepBestPredictions"][1])
 	predictionQueue.put(futurePrediction)
 	prediction = predictionQueue.get()
-	print str(timestamp) + ". predicted: " + str(prediction) + ", actual: " + str(players) + ", queuesize: " + str(predictionQueue.qsize())
+	print str(timestamp) + ". predicted: " + str(prediction) + ", actual: " + str(players)
 	print "next is gonna be: " + str(futurePrediction)
 	resultWriter.writerow([timestamp, prediction, players])
 	futureWriter.writerow([timestamp, players])
