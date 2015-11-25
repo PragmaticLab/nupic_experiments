@@ -19,13 +19,16 @@ count = 0
 while True:
 	players = getPlayersOnline()
 	timestamp = datetime.datetime.now()
+	print "1"
 	result = model.run({
 		"timestamp": timestamp,
 		"players": players
 	})
+	print '2'
 	predictionQueue.put(result.inferences["multiStepBestPredictions"][10])
+	print "3"
 	prediction = predictionQueue.get()
-	print str(count) + ". predicted: " + str(prediction) + ", actual: " + str(players) 
+	print str(count) + ". predicted: " + str(prediction) + ", actual: " + str(players)
 
 	time.sleep(1)
 	count += 1
