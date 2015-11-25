@@ -3,8 +3,6 @@ import csv
 from nupic.frameworks.opf.modelfactory import ModelFactory
 from nupic.swarming import permutations_runner
 
-import generate_data
-
 SWARM_CONFIG = {
   "includedFields": [
     {
