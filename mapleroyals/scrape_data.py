@@ -21,7 +21,7 @@ if __name__ == "__main__":
 	writer.writerow(["datetime","int"])
 	writer.writerow(["T",""])
 	for i in range(100):
-		timestamp = datetime.datetime.now().strftime('%m/%d/%Y %H:%M:%S')
+		timestamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 		players = getPlayersOnline()
 		writer.writerow([timestamp, players])
 		time.sleep(1)
