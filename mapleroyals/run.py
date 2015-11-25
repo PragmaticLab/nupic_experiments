@@ -18,6 +18,7 @@ for i in range(predictionSteps):
 count = 0
 while True:
 	players = getPlayersOnline()
+	print players
 	timestamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 	result = model.run({
 		"timestamp": timestamp,
