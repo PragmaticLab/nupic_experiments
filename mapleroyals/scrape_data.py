@@ -5,8 +5,12 @@ import datetime
 
 def getPlayersOnline():
 	req = urllib2.Request('http://mapleroyals.com/?page=index')
-	response = urllib2.urlopen(req)
-	the_page = response.read()
+	try:
+		response = urllib2.urlopen(req)
+		the_page = response.read()
+	except URLError as e:
+		e.reason
+		return -1
 	the_page = the_page[the_page.index("Players Online") + 15:]
 	the_page = the_page[:the_page.index("<br />")]
 	number = int(the_page)
