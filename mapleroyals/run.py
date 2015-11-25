@@ -8,7 +8,7 @@ import datetime
 from Queue import Queue
 
 
-predictionSteps = 10
+predictionSteps = 1
 model = ModelFactory.create(model_params.MODEL_PARAMS)
 model.enableInference({'predictedField': 'players'})
 
@@ -19,14 +19,11 @@ count = 0
 while True:
 	players = getPlayersOnline()
 	timestamp = datetime.datetime.now()
-	print "1"
 	result = model.run({
 		"timestamp": timestamp,
 		"players": players
 	})
-	print '2'
 	predictionQueue.put(result.inferences["multiStepBestPredictions"][10])
-	print "3"
 	prediction = predictionQueue.get()
 	print str(count) + ". predicted: " + str(prediction) + ", actual: " + str(players)
 
