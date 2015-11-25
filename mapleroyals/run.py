@@ -13,12 +13,12 @@ predictionSteps = 1
 model = ModelFactory.create(model_params.MODEL_PARAMS)
 model.enableInference({'predictedField': 'players'})
 
-resultFile = open("output.txt", 'wb')
+resultFile = open("output.txt", 'w', 0)
 resultWriter = csv.writer(resultFile)
 resultWriter.writerow(["timestamp","prediction","actual"])
 resultWriter.writerow(["datetime","int","int"])
 resultWriter.writerow(["T","",""])
-futureFile = open("future.txt", 'wb')
+futureFile = open("future.txt", 'w', 0)
 futureWriter = csv.writer(futureFile)
 futureWriter.writerow(["timestamp","players"])
 futureWriter.writerow(["datetime","int"])
@@ -40,9 +40,6 @@ while True:
 	print str(timestamp) + ". predicted: " + str(prediction) + ", actual: " + str(players)
 	resultWriter.writerow([timestamp, prediction, players])
 	futureWriter.writerow([timestamp, players])
-	if count % 10 == 0:
-		resultFile.flush()
-		futureWriter.flush()
 	if count % 1000 == 0:
 		model.save("production_model")
 	time.sleep(60)

@@ -15,7 +15,7 @@ def getPlayersOnline():
 if __name__ == "__main__":
 	filename = "lagroyals.csv"
 	print "Generating lagroyal data into %s" % filename
-	fileHandle = open(filename,"w")
+	fileHandle = open(filename,"w", 0)
 	writer = csv.writer(fileHandle)
 	writer.writerow(["timestamp","players"])
 	writer.writerow(["datetime","int"])
@@ -25,4 +25,3 @@ if __name__ == "__main__":
 		players = getPlayersOnline()
 		writer.writerow([timestamp, players])
 		time.sleep(60)
-		fileHandle.flush()
