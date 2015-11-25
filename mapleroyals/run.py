@@ -23,7 +23,7 @@ while True:
 		"timestamp": timestamp,
 		"players": players
 	})
-	predictionQueue.put(result.inferences["multiStepBestPredictions"][10])
+	predictionQueue.put(result.inferences["multiStepBestPredictions"][1])
 	prediction = predictionQueue.get()
 	print str(count) + ". predicted: " + str(prediction) + ", actual: " + str(players)
 
