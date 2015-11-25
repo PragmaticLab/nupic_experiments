@@ -38,8 +38,8 @@ while True:
 	futurePrediction = int(result.inferences["multiStepBestPredictions"][1])
 	predictionQueue.put(futurePrediction)
 	prediction = predictionQueue.get()
-	print "next is gonna be: " + str(futurePrediction)
 	print str(timestamp) + ". predicted: " + str(prediction) + ", actual: " + str(players) + ", queuesize: " + str(predictionQueue.qsize())
+	print "next is gonna be: " + str(futurePrediction)
 	resultWriter.writerow([timestamp, prediction, players])
 	futureWriter.writerow([timestamp, players])
 	if count % 1000 == 0:
