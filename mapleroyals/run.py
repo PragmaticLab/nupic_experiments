@@ -22,10 +22,10 @@ while True:
 	result = model.run({
 		"timestamp": timestamp,
 		"players": players
-    })
+	})
 	predictionQueue.put(result.inferences["multiStepBestPredictions"][10])
-	prediciton = predictionQueue.get()
-	print str(count) + ". predicted: " + str(prediciton) + ", actual: " + str(result) 
+	prediction = predictionQueue.get()
+	print str(count) + ". predicted: " + str(prediction) + ", actual: " + str(players) 
 
 	time.sleep(1)
 	count += 1
