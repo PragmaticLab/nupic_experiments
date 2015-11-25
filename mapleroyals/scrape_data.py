@@ -20,8 +20,9 @@ if __name__ == "__main__":
 	writer.writerow(["timestamp","players"])
 	writer.writerow(["datetime","int"])
 	writer.writerow(["T",""])
-	for i in range(100):
+	for i in range(20):
 		timestamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 		players = getPlayersOnline()
 		writer.writerow([timestamp, players])
-		time.sleep(1)
+		time.sleep(60)
+		fileHandle.flush()
