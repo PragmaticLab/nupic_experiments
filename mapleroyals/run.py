@@ -6,6 +6,7 @@ from scrape_data import getPlayersOnline
 import time
 import datetime
 from Queue import Queue
+import csv
 
 
 predictionSteps = 1
