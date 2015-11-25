@@ -41,6 +41,6 @@ while True:
 	resultWriter.writerow([timestamp, prediction, players])
 	futureWriter.writerow([timestamp, players])
 	if count % 1000 == 0:
-		model.save("production_model")
+		model.save("/home/ec2-user/HTM_sequential_learner/mapleroyals/production_model")
 	time.sleep(60)
 	count += 1
