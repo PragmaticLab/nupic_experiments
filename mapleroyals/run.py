@@ -30,6 +30,9 @@ for i in range(predictionSteps):
 count = 0
 while True:
 	players = getPlayersOnline()
+	if players == -1:
+		time.sleep(60)
+		continue
 	timestamp = datetime.datetime.now()
 	result = model.run({
 		"timestamp": timestamp,
