@@ -9,9 +9,31 @@ from Queue import Queue
 import csv
 
 
-predictionSteps = 1
-model = ModelFactory.create(model_params.MODEL_PARAMS)
-model.enableInference({'predictedField': 'players'})
+predictionSteps = 5
+# load prev model
+if len(sys.argv) >= 2 and sys.argv[1] != "None":
+	print "loading old model"
+	model = ModelFactory.loadFromCheckpoint(sys.argv[1])
+else:
+	model = ModelFactory.create(model_params.MODEL_PARAMS)
+	model.enableInference({'predictedField': 'players'})
+# load initialization data
+if len(sys.argv) >= 3 and sys.argv[2] != "None":
+	print "initializing model with data"
+	f = open(sys.argv[2], 'r')
+	csvReader = csv.reader(f)
+	# skip header rows
+	csvReader.next()
+	csvReader.next()
+	csvReader.next()
+	for row in csvReader:
+		timestamp = datetime.strptime(row[0], '%Y-%m-%d %H:%M:%S')
+		players = row[1]
+		result = model.run({
+			"timestamp": timestamp,
+			"players": players
+		})
+
 
 resultFile = open("output.txt", 'w', 0)
 resultWriter = csv.writer(resultFile)
@@ -38,7 +60,7 @@ while True:
 		"timestamp": timestamp,
 		"players": players
 	})
-	futurePrediction = int(result.inferences["multiStepBestPredictions"][1])
+	futurePrediction = int(result.inferences["multiStepBestPredictions"][5])
 	predictionQueue.put(futurePrediction)
 	prediction = predictionQueue.get()
 	print str(timestamp) + ". predicted: " + str(prediction) + ", actual: " + str(players)
