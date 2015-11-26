@@ -27,7 +27,7 @@ if len(sys.argv) >= 3 and sys.argv[2] != "None":
 	csvReader.next()
 	csvReader.next()
 	for row in csvReader:
-		timestamp = datetime.strptime(row[0], '%Y-%m-%d %H:%M:%S')
+		timestamp = datetime.datetime.strptime(row[0], '%Y-%m-%d %H:%M:%S')
 		players = row[1]
 		result = model.run({
 			"timestamp": timestamp,
