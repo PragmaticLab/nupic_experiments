@@ -65,6 +65,7 @@ while True:
 	prediction = predictionQueue.get()
 	print str(timestamp) + ". predicted: " + str(prediction) + ", actual: " + str(players)
 	print "next is gonna be: " + str(futurePrediction)
+	timestamp = timestamp.strftime('%Y-%m-%d %H:%M:%S')
 	resultWriter.writerow([timestamp, prediction, players])
 	futureWriter.writerow([timestamp, players])
 	if count % 1000 == 0:
