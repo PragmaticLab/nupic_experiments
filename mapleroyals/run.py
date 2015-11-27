@@ -26,13 +26,17 @@ if len(sys.argv) >= 3 and sys.argv[2] != "None":
 	csvReader.next()
 	csvReader.next()
 	csvReader.next()
+	count = 0
 	for row in csvReader:
+		if count % 100 == 0:
+			print "processed: " + str(count)
 		timestamp = datetime.datetime.strptime(row[0], '%Y-%m-%d %H:%M:%S')
 		players = row[1]
 		result = model.run({
 			"timestamp": timestamp,
 			"players": players
 		})
+		futurePrediction = int(result.inferences["multiStepBestPredictions"][5])
 
 
 resultFile = open("output.txt", 'w', 0)
@@ -64,7 +68,7 @@ while True:
 	predictionQueue.put(futurePrediction)
 	prediction = predictionQueue.get()
 	print str(timestamp) + ". predicted: " + str(prediction) + ", actual: " + str(players)
-	print "after " + str(predictionSteps) + "steps is gonna be: " + str(futurePrediction)
+	print "after " + str(predictionSteps) + " steps is gonna be: " + str(futurePrediction)
 	timestamp = timestamp.strftime('%Y-%m-%d %H:%M:%S')
 	resultWriter.writerow([timestamp, prediction, players])
 	futureWriter.writerow([timestamp, players])

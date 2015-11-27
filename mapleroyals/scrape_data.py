@@ -8,8 +8,7 @@ def getPlayersOnline():
 	try:
 		response = urllib2.urlopen(req)
 		the_page = response.read()
-	except URLError as e:
-		e.reason
+	except Exception as e:
 		return -1
 	the_page = the_page[the_page.index("Players Online") + 15:]
 	the_page = the_page[:the_page.index("<br />")]

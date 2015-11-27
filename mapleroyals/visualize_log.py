@@ -8,7 +8,8 @@ WINDOW = 100
 plt.ion()
 fig = plt.figure()
 plt.title('MapleLagyals Online Player Prediction')
-plt.xlabel('time [s]')
+plt.xlabel('time [min]')
+plt.xticks(range(0, 100, 5))
 plt.ylabel('Players [%]')
 
 actHistory = deque([0.0] * WINDOW, maxlen=100)
@@ -35,7 +36,7 @@ for row in csvReader:
 	predline.set_ydata(predHistory)
 	plt.draw()
 	plt.legend( ('actual','predicted') )  
-	time.sleep(float(sys.argv[2]))
+	# time.sleep(float(sys.argv[2]))
 
 s = raw_input('---LAG ON---')
 
