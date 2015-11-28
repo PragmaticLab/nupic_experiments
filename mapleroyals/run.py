@@ -9,7 +9,7 @@ from Queue import Queue
 import csv
 
 
-predictionSteps = 5
+predictionSteps = 30
 # load prev model
 if len(sys.argv) >= 2 and sys.argv[1] != "None":
 	print "loading old model"
@@ -37,6 +37,7 @@ if len(sys.argv) >= 3 and sys.argv[2] != "None":
 			"players": players
 		})
 		futurePrediction = int(result.inferences["multiStepBestPredictions"][5])
+		count += 1
 
 
 resultFile = open("output.txt", 'w', 0)
@@ -64,7 +65,7 @@ while True:
 		"timestamp": timestamp,
 		"players": players
 	})
-	futurePrediction = int(result.inferences["multiStepBestPredictions"][5])
+	futurePrediction = int(result.inferences["multiStepBestPredictions"][predictionSteps])
 	predictionQueue.put(futurePrediction)
 	prediction = predictionQueue.get()
 	print str(timestamp) + ". predicted: " + str(prediction) + ", actual: " + str(players)
