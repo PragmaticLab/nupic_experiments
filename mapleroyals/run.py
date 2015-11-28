@@ -51,7 +51,7 @@ futureWriter.writerow(["timestamp","players"])
 futureWriter.writerow(["datetime","int"])
 futureWriter.writerow(["T",""])
 
-predictionQueue = Queue(maxsize=10)
+predictionQueue = Queue(maxsize=predictionSteps + 2)
 for i in range(predictionSteps):
 	predictionQueue.put(-1)
 count = 0
