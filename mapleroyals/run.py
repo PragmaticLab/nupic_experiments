@@ -36,7 +36,7 @@ if len(sys.argv) >= 3 and sys.argv[2] != "None":
 			"timestamp": timestamp,
 			"players": players
 		})
-		futurePrediction = int(result.inferences["multiStepBestPredictions"][5])
+		futurePrediction = int(result.inferences["multiStepBestPredictions"][predictionSteps])
 		count += 1
 
 
