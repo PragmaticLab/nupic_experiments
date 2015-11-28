@@ -27,7 +27,12 @@ csvReader.next()
 csvReader.next()
 csvReader.next()
 
+linesToSkip = int(sys.argv[2])
+count = 0
 for row in csvReader:
+	if count < linesToSkip:
+		count += 1
+		continue
 	predicted = row[1]
 	actual = row[2]
 	actHistory.append(actual)
@@ -36,7 +41,6 @@ for row in csvReader:
 	predline.set_ydata(predHistory)
 	plt.draw()
 	plt.legend( ('actual','predicted') )  
-	# time.sleep(float(sys.argv[2]))
 
 s = raw_input('---LAG ON---')
 
