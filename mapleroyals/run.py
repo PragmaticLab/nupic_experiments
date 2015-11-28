@@ -9,7 +9,7 @@ from Queue import Queue
 import csv
 
 
-predictionSteps = 30
+predictionSteps = 15
 # load prev model
 if len(sys.argv) >= 2 and sys.argv[1] != "None":
 	print "loading old model"

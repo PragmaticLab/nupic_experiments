@@ -32,7 +32,7 @@ SWARM_CONFIG = {
   "inferenceType": "TemporalMultiStep",
   "inferenceArgs": {
     "predictionSteps": [
-      30
+      15
     ],
     "predictedField": "players"
   },
