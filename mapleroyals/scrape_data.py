@@ -8,11 +8,12 @@ def getPlayersOnline():
 	try:
 		response = urllib2.urlopen(req)
 		the_page = response.read()
+		the_page = the_page[the_page.index("Players Online") + 15:]
+		the_page = the_page[:the_page.index("<br />")]
+		number = int(the_page)
 	except Exception as e:
+		print "scrape error"
 		return -1
-	the_page = the_page[the_page.index("Players Online") + 15:]
-	the_page = the_page[:the_page.index("<br />")]
-	number = int(the_page)
 	return number
 
 if __name__ == "__main__":
