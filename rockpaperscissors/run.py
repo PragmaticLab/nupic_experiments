@@ -9,7 +9,7 @@ from nupic.frameworks.opf.modelfactory import ModelFactory
 from model_params import rps_model_params
 from generate_data import RockPaperScissors
 
-SIM_COUNT = 10000
+SIM_COUNT = 200
 
 predictionSteps = 1
 model = ModelFactory.create(rps_model_params.MODEL_PARAMS)
@@ -19,9 +19,9 @@ game = RockPaperScissors()
 
 resultFile = open("output.txt", 'w', 0)
 resultWriter = csv.writer(resultFile)
-resultWriter.writerow(["prediction","actual"])
-resultWriter.writerow(["int","int"])
-resultWriter.writerow(["",""])
+resultWriter.writerow(["prediction","actual","correct"])
+resultWriter.writerow(["string","string","string"])
+resultWriter.writerow(["","",""])
 
 count = 0
 lastWinner = "draw"
