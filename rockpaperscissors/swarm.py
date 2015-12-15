@@ -1,5 +1,8 @@
 #!/usr/bin/python
+import os
 import csv
+import pprint
+
 from nupic.frameworks.opf.modelfactory import ModelFactory
 from nupic.swarming import permutations_runner
 
@@ -7,21 +10,15 @@ SWARM_CONFIG = {
     "includedFields": [
         {
             "fieldName": "player1",
-            "fieldType": "int",
-            "maxValue": 2,
-            "minValue": 0
+            "fieldType": "string"
         },
         {
             "fieldName": "player2",
-            "fieldType": "int",
-            "maxValue": 2,
-            "minValue": 0
+            "fieldType": "string"
         },
         {
-            "fieldName": "scoreBeforeDuel",
-            "fieldType": "int",
-            "maxValue": 5,
-            "minValue": -5
+            "fieldName": "winner",
+            "fieldType": "string"
         }
     ],
     "streamDef": {
@@ -42,16 +39,40 @@ SWARM_CONFIG = {
         "predictionSteps": [
             1
         ],
-        "predictedField": "scoreBeforeDuel"
+        "predictedField": "winner"
     },
-    "iterationCount": -1,
-    "swarmSize": "small"
+    "iterationCount": 3000,
+    "swarmSize": "medium"
 }
 
+def modelParamsToString(modelParams):
+  pp = pprint.PrettyPrinter(indent=2)
+  return pp.pformat(modelParams)
+
+def writeModelParamsToFile(modelParams, name):
+  cleanName = name.replace(" ", "_").replace("-", "_")
+  paramsName = "%s_model_params.py" % cleanName
+  outDir = os.path.join(os.getcwd(), 'model_params')
+  if not os.path.isdir(outDir):
+    os.mkdir(outDir)
+  outPath = os.path.join(os.getcwd(), 'model_params', paramsName)
+  with open(outPath, "wb") as outFile:
+    modelParamsString = modelParamsToString(modelParams)
+    outFile.write("MODEL_PARAMS = \\\n%s" % modelParamsString)
+  return outPath
 
 def swarm_over_data():
-  return permutations_runner.runWithConfig(SWARM_CONFIG,
-    {'maxWorkers': 8, 'overwrite': True})
+  permWorkDir = os.path.abspath('swarm')
+  if not os.path.exists(permWorkDir):
+    os.mkdir(permWorkDir)
+  modelParams = permutations_runner.runWithConfig(SWARM_CONFIG,
+    {'maxWorkers': 8, 'overwrite': True},
+    outputLabel='rps',
+    outDir=permWorkDir,
+    permWorkDir=permWorkDir,
+    verbosity=1
+  )
+  modelParamsFile = writeModelParamsToFile(modelParams, 'rps')
 
 def run_swarm():
     input_file = "rps.csv"
