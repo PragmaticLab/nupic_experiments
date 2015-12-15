@@ -2,7 +2,7 @@ import csv
 import math
 import random
 
-ROWS = 10000
+ROWS = 200
 
 class RockPaperScissors:
     def __init__(self):
