@@ -4,3 +4,5 @@ description.py
 *.pkl
 */model_0/*
 *.pyc
+*/swarm
+*/model_params
