@@ -1,4 +1,5 @@
 tan/*.csv
+*.csv
 permutations.py
 description.py
 *.pkl
