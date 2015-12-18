@@ -20,7 +20,7 @@ def run(filename="dontrepeat.csv"):
     while count < ROWS:
         hand = my_map[int(random.random() * 2)]
         writer.writerow([hand, lastHand, status])
-        status = "ok" if hand != lastHand else "grr" # this is added in the next round
+        status = "not_same" if hand != lastHand else "same" # this is added in the next round
         lastHand = hand
         count += 1
 
